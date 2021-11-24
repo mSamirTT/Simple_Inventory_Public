@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>StarterApp</name>
+    </assembly>
+    <members>
+        <member name="M:StarterApp.Controllers.AuthController.SignIn(StarterApp.ViewModels.UserLogin)">
+            <summary>
+            </summary>
+            <param name="userLogin">administrator@localhost /  Administrator1!</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

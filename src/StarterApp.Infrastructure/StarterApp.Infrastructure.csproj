@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>StarterApp.Infrastructure</RootNamespace>
+    <AssemblyName>StarterApp.Infrastructure</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200804194431_Category.cs" />
+    <Compile Remove="Migrations\20200804194431_Category.Designer.cs" />
+    <Compile Remove="Migrations\20200806092057_Add_Product.cs" />
+    <Compile Remove="Migrations\20200806092057_Add_Product.Designer.cs" />
+    <Compile Remove="Migrations\20200821112340_Inventory.cs" />
+    <Compile Remove="Migrations\20200821112340_Inventory.Designer.cs" />
+    <Compile Remove="Migrations\20210522094011_Initialize.cs" />
+    <Compile Remove="Migrations\20210522094011_Initialize.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="5.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.6" />
+    <PackageReference Include="CsvHelper" Version="27.1.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StarterApp.Core\StarterApp.Core.csproj" />
+  </ItemGroup>
+
+</Project>

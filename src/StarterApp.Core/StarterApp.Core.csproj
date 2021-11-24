@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>StarterApp.Core</RootNamespace>
+    <AssemblyName>StarterApp.Core</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Common\Models\Events\**" />
+    <Compile Remove="CustomerService\**" />
+    <Compile Remove="DetailService\**" />
+    <Compile Remove="HeaderService\**" />
+    <EmbeddedResource Remove="Common\Models\Events\**" />
+    <EmbeddedResource Remove="CustomerService\**" />
+    <EmbeddedResource Remove="DetailService\**" />
+    <EmbeddedResource Remove="HeaderService\**" />
+    <None Remove="Common\Models\Events\**" />
+    <None Remove="CustomerService\**" />
+    <None Remove="DetailService\**" />
+    <None Remove="HeaderService\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="FluentValidation" Version="10.2.2" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.6" />
+    <PackageReference Include="Scrutor" Version="3.3.0" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\Mappings\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+</Project>

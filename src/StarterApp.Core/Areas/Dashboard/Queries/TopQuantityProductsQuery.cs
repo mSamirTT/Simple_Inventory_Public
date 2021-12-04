@@ -19,36 +19,42 @@ namespace StarterApp.Core.Areas.Dashboard.Queries
     {
         public async Task<TopQtyProduct> Handle(TopQuantityProductsQuery request, CancellationToken cancellationToken)
         {
-            var totalCount = await _repository.Query
-                .Include(x => x.IssueDetails)
+            var totalSupplyCount = await _repository.Query
                 .Include(x => x.SupplyDetails)
-                .SumAsync(x => x.SupplyDetails.Sum(x => x.Quantity) - x.IssueDetails.Sum(x => x.Quantity));
+                .SelectMany(x => x.SupplyDetails)
+                .SumAsync(x => x.Quantity, cancellationToken);
 
+            var totalIssueCount = await _repository.Query
+                .Include(x => x.IssueDetails)
+                .SelectMany(x => x.IssueDetails)
+                .SumAsync(x => x.Quantity, cancellationToken);
 
-            var items = await _repository.Query
+            var totalCount = totalSupplyCount - totalIssueCount;
+
+            var top4Items = await _repository.Query
                 .Include(x => x.IssueDetails)
                 .Include(x => x.SupplyDetails)
                 .Select(x => new TopQtyProductItem
                 {
                     Id = x.Id,
                     Name = x.Name,
-                    Qty = x.SupplyDetails.Sum(x => x.Quantity) - x.IssueDetails.Sum(x => x.Quantity)
+                    Qty = x.SupplyDetails.Sum(s => s.Quantity) - x.IssueDetails.Sum(x => x.Quantity)
                 })
                 .Where(x => x.Qty > 0)
                 .OrderByDescending(x => x.Qty)
                 .Take(4)
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
 
-            var fetchedItemsQty = items.Sum(x => x.Qty);
+            var fetchedItemsQty = top4Items.Sum(x => x.Qty);
 
-            items.Add(new TopQtyProductItem
+            top4Items.Add(new TopQtyProductItem
             {
                 Id = 0,
                 Name = "Other",
                 Qty = totalCount - fetchedItemsQty
             });
 
-            return new TopQtyProduct { TotalQty = totalCount, Items = items };
+            return new TopQtyProduct { TotalQty = totalCount, Items = top4Items };
         }
     }
 }
